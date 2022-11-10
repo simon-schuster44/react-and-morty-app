@@ -7,7 +7,6 @@ function App() {
     "https://rickandmortyapi.com/api/character",
     "results"
   );
-  console.log(data);
   return (
     <div className="App">
       <Header>React and Morty App</Header>
