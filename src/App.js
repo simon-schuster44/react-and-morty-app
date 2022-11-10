@@ -45,7 +45,7 @@ const Card = styled.section`
   box-shadow: 2px 0 10px black;
   background-color: #94778b;
   margin: 100px auto;
-  border-radius: 8px;
+  border-radius: 14px;
   width: 90%;
   max-width: 400px;
   overflow: hidden;
@@ -62,12 +62,11 @@ const NavBar = styled.nav`
 `;
 
 const Image = styled.img`
-  border: 4px solid #1f2232;
-  border-radius: 8px;
-  margin: 15px;
+  border-top-radius: 14px;
+  width: 100%;
 `;
 
 const NameTag = styled.h2`
-  margin: 10px;
+  margin: 15px;
   font-size: 30px;
 `;
