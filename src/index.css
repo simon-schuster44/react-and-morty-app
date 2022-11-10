@@ -3,6 +3,13 @@
   color: #dedbd8;
 }
 
+:root {
+  --HeaderColor: #1f2232;
+  --TextColor: #dedbd8;
+  --BackgroundColor: #52796f;
+  --CardColor: #94778b;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
