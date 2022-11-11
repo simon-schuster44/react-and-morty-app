@@ -3,7 +3,6 @@ import styled from "styled-components";
 export default function Details({ data, details }) {
   return data.map((item) => {
     if (details.includes(item.id)) {
-      console.log(item);
       return (
         <CharacterCard>
           <Image src={item.image} />
