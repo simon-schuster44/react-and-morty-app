@@ -1,6 +1,7 @@
 import "./App.css";
 import styled from "styled-components";
 import useFetch from "./Hooks/useFetch";
+import { FaHome } from "react-icons/fa";
 
 function App() {
   const [data, setData] = useFetch(
@@ -12,13 +13,13 @@ function App() {
       <Header>React and Morty App</Header>
 
       {data.map((character) => (
-        <Card>
+        <Card key={data.id}>
           <Image src={character.image} />
           <NameTag>{character.name}</NameTag>
         </Card>
       ))}
       <NavBar>
-        <a href="#">Placeholder</a>
+        <FaHome />
         <a href="#">Placeholder</a>
         <a href="#">Placeholder</a>
         <a href="#">Placeholder</a>
@@ -62,7 +63,6 @@ const NavBar = styled.nav`
 `;
 
 const Image = styled.img`
-  border-top-radius: 14px;
   width: 100%;
 `;
 
