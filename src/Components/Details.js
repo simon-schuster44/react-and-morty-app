@@ -1,20 +1,19 @@
 import styled from "styled-components";
+import { useContext } from "react";
+import { FavoriteContext } from "../context/Favorites-context";
+import useLocalStorage from "../Hooks/useLocalStorage";
 
-export default function Details({ data, details }) {
-  return data.map((item) => {
-    if (details.includes(item.id)) {
-      return (
-        <CharacterCard>
-          <Image src={item.image} />
-          <NameTag>{item.name}</NameTag>
-          <h3>Gender: {item.gender}</h3>
-          <h3>Species: {item.species}</h3>
-          <h3>Status: {item.status}</h3>
-          <Button>show more</Button>
-        </CharacterCard>
-      );
-    }
-  });
+export default function Details({ character, setDetailsState }) {
+  return (
+    <CharacterCard>
+      <Image src={character.image} />
+      <NameTag>{character.name}</NameTag>
+      <h3>Gender: {character.gender}</h3>
+      <h3>Species: {character.species}</h3>
+      <h3>Status: {character.status}</h3>
+      <Button onClick={() => setDetailsState(false)}>show less</Button>
+    </CharacterCard>
+  );
 }
 
 const CharacterCard = styled.section`
@@ -25,6 +24,9 @@ const CharacterCard = styled.section`
   width: 90%;
   max-width: 400px;
   overflow: hidden;
+  h3 {
+    font-size: 1.5rem;
+  }
 `;
 const Image = styled.img`
   width: 100%;

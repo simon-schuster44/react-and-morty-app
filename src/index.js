@@ -2,10 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { useContext } from "react";
+import { FavoriteContextProvider } from "./context/Favorites-context";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <FavoriteContextProvider>
+      <App />
+    </FavoriteContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

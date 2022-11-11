@@ -1,11 +1,13 @@
 import "./App.css";
 import styled from "styled-components";
 import useFetch from "./Hooks/useFetch";
+import useLocalStorage from "./Hooks/useLocalStorage";
+
 import { ReactComponent as HouseSvg } from "./svg/house-solid.svg";
-import { ReactComponent as DetailsSvg } from "./svg/sistrix.svg";
+import { ReactComponent as StarSvg } from "./svg/star-solid.svg";
 import { useState } from "react";
 import Home from "./Components/Home";
-import Details from "./Components/Details";
+import Favorites from "./Components/Favorites";
 
 function App() {
   const [data, setData] = useFetch(
@@ -13,29 +15,38 @@ function App() {
     "results"
   );
   const [pageState, setPageState] = useState("home");
+  const [favorites, setFavorites] = useLocalStorage([], "favorites");
 
-  const [details, setDetails] = useState([]);
-  function addDetailsCard(value) {
-    setDetails([...details, value]);
+  function handleFavorite(id) {
+    if (favorites.includes(id)) {
+      setFavorites(favorites.filter((item) => item !== id));
+    } else {
+      setFavorites([...favorites, id]);
+    }
   }
 
   return (
     <div className="App">
       <Header>React and Morty App</Header>
       {pageState === "home" ? (
-        <Home
+        <Home data={data} handleFavorite={handleFavorite} />
+      ) : (
+        ""
+      )}
+      {pageState === "favorites" ? (
+        <Favorites
           data={data}
-          addDetailsCard={addDetailsCard}
-          setPageState={setPageState}
+          favorites={favorites}
+          handleFavorite={handleFavorite}
         />
       ) : (
         ""
       )}
-      {pageState === "details" ? <Details data={data} details={details} /> : ""}
       <NavBar>
+        <button onClick={() => console.log(favorites)}>Log Favs</button>
         <HomeIcon onClick={() => setPageState("home")} />
         <a href="#">Placeholder</a>
-        <DetailsIcon onClick={() => setPageState("details")} />
+        <FavoritesIcon onClick={() => setPageState("favorites")} />
         <a href="#">Placeholder</a>
       </NavBar>
     </div>
@@ -54,6 +65,7 @@ const Header = styled.h1`
   padding-top: 10px;
   top: 0;
   margin: 0;
+  z-index: 1;
 `;
 
 const NavBar = styled.nav`
@@ -64,13 +76,17 @@ const NavBar = styled.nav`
   background-color: #1f2232;
   display: flex;
   justify-content: space-around;
+
+  button {
+    color: black;
+  }
 `;
 
 const HomeIcon = styled(HouseSvg)`
   width: 20%;
   fill: white;
 `;
-const DetailsIcon = styled(DetailsSvg)`
+const FavoritesIcon = styled(StarSvg)`
   width: 20%;
   fill: white;
 `;
